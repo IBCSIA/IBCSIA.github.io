@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html style="width:100%;height:100%;">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src = "js/Java_cart_momentum.js"></script>
+    <script> sleep = ms => new Promise(resolve => setTimeout(resolve, ms)) </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+    <body style="width:100%;height:100%;">
+        <svg id="mainsvg" height="100vh" width="100vw">
+        <circle id="circle1" cx="-100" cy="50vh" r="10" stroke="black" stroke-width="4" fill="None" />
+        <circle id="circle2" cx="-100" cy="50vh" r="10" stroke="black" stroke-width="4" fill="None" />
+        </svg><br>
+
+        <div class="container" style="position:fixed; left:0px; top:50px; bottom:0px; width:200px;
+        background-color:#eee">
+            <div class="row">
+                <button type="button" 
+                style="height:50px; width:200px; border-style:none; background-color:#ccc;"
+                onclick = pause()>Pause Simulation</button>
+            </div>
+            <div class="row">
+                <p id = "position1Label"> Cart 1 Position: 0.00 </p>
+            </div>
+            <div class="row">
+                <p id = "velocity1Label"> Cart 1 Velocity: 0.00 </p>
+            </div>
+
+            <div class="row"><br></div>
+
+            <div class="row">
+                <p id = "position2Label"> Cart 2 Position: 0.00 </p>
+            </div>
+            <div class="row">
+                <p id = "velocity2Label"> Cart 2 Velocity: 0.00 </p>
+            </div>
+        </div>
+
+        <button type="button" style="position:fixed; left:0px; bottom:0px; height:50px; width:200px; border-style:none; background-color:#ccc;" onclick = startCartSystem()>Cart System</button>
+
+        <button class="" type="button" data-bs-toggle="collapse" data-bs-target="#simulationSlider" aria-expanded="false" aria-controls="simulationSlider"
+                style="position:fixed; left:0px; top:0px; z-index:1; width:100px; height:50px; border-style:none; border-right: solid; border-color: #aaa">
+        Simulations
+        </button>
+
+        <button class="" type="button" data-bs-toggle="collapse" data-bs-target="#variableSlider" aria-expanded="false" aria-controls="variableSlider"
+                style="position:fixed; left:100px; top:0px; z-index:1; width:101px; height:50px; border-style:none; border-left: solid; border-color: #aaa;">
+        Variables
+        </button>
+
+        <div class="collapse collapse-horizontal" id="simulationSlider"
+             style="position: fixed; top: 50px; bottom:50px; left:0px; background-color: #eee;">
+            <div class="accordion accordion-flush" id="accordionExample">
+                <div class="accordion-item" style="width: 200px">
+                    <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
+                        Main Pages
+                    </button>
+                    </h2>
+                    <div id="collapseZero" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <a href="titlePage.html">Title Page</a> <br>
+                        hyperlink2 <br>
+                        hyperlink3
+                    </div>
+                    </div>
+                </div>
+                <div class="accordion-item" style="width: 200px">
+                    <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        Kinematics
+                    </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <a href="projectileSimulation.html">Projectiles</a> <br>
+                        hyperlink2 <br>
+                        hyperlink3
+                    </div>
+                    </div>
+                </div>
+                <div class="accordion-item" style="width: 200px">
+                    <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Forces and Momentum
+                    </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <a href="cartSimulation.html">Carts</a> <br>
+                        hyperlink2 <br>
+                        hyperlink3
+                    </div>
+                    </div>
+                </div>
+                <div class="accordion-item" style="width: 200px">
+                    <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Fields
+                    </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        hyperlink1 <br>
+                        hyperlink2 <br>
+                        hyperlink3
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="collapse" id="variableSlider" style="position: fixed; top: 0px; left: 200px; width: calc(100% - 200px);">
+            <div class="container" style="background-color: #eee;">
+                <div class="row">
+                    <div class="col"><p id="dis1Label">Cart 1 Position:</p></div>
+                    <div class="col"><input id="dis1Input" type="number" value="-100" style="width: 100px;"></div>
+
+                    <div class="col"><p id="vel1Label">Cart 1 Velocity:</p></div>
+                    <div class="col"><input id="vel1Input" type="number" value="10" style="width: 100px;"></div>
+                    
+                    <div class="col"><p id="mass1Label">Cart 1 Mass:</p></div>
+                    <div class="col"><input id="mass1Input" type="number" value="1" style="width: 100px;"></div>
+
+                    <div class="col"><p id="radius1Label">Cart 1 Radius:</p></div>
+                    <div class="col"><input id="radius1Input" type="number" value="10" style="width: 100px;"></div>
+                </div>
+                <div class="row">
+                    <div class="col"><p id="dis2Label">Cart 2 Position:</p></div>
+                    <div class="col"><input id="dis2Input" type="number" value="100" style="width: 100px;"></div>
+
+                    <div class="col"><p id="vel2Label">Cart 2 Velocity:</p></div>
+                    <div class="col"><input id="vel2Input" type="number" value="-10" style="width: 100px;"></div>
+
+                    <div class="col"><p id="mass2Label">Cart 2 Mass:</p></div>
+                    <div class="col"><input id="mass2Input" type="number" value="1" style="width: 100px;"></div>
+
+                    <div class="col"><p id="radius1Labe2">Cart 2 Radius:</p></div>
+                    <div class="col"><input id="radius2Input" type="number" value="10" style="width: 100px;"></div>
+                </div>
+                <div class="row">
+                    <div class="col"><p id="cTypeLabel">Collision Type:</p></div>
+                    <div class="col"><input id="cTypeInput" type="text" value="elastic" style="width: 100px;"></div>
+
+                    <div class="col"></div>
+                    <div class="col"></div>
+
+                    <div class="col"></div>
+                    <div class="col"></div>
+
+                    <div class="col"></div>
+                    <div class="col"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
